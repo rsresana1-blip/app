@@ -135,14 +135,14 @@ function cartaBox(u) {
       : h('p', { class: 'muted' }, 'Nessuna carta caricata.'));
 }
 export function unitaView(u) {
-  const key = 'scout_incl_nov'; const incl = u === 'Clan' && LS.get(key, false);
-  const f = incl ? 'Clan + Noviziato' : u;
+  // La pagina "Clan" è la comunità R/S intera: mostra tutti i ragazzi (clan, noviziato, partenti), ognuno con la sua unità.
+  const f = u === 'Clan' ? '' : u;
   const rag = all('ragazzi').filter((r) => r.stato === 'Attivo' && inUnita(r.unita, f)).sort(T.ragazzi.sort);
   const att = ofYear('attivita').filter((a) => (!a.data || a.data >= today()) && inUnita(a.unita, f)).sort(T.attivita.sort).slice(0, 6);
   const links = docsOf(null, u);
   return h('section', { class: 'view' },
     h('div', { class: 'view-head' }, h('h1', {}, u), exportBar(u + ' – ragazzi', () => rowsForExport('ragazzi', rag))),
-    u === 'Clan' ? h('label', { class: 'chip-check big' }, h('input', { type: 'checkbox', checked: incl, onchange: (e) => { LS.set(key, e.target.checked); refresh(); } }), h('span', {}, 'Includi noviziato')) : null,
+    u === 'Clan' ? h('p', { class: 'muted' }, 'Qui compaiono tutti i ragazzi della comunità R/S: clan, noviziato e partenti.') : null,
     links.length ? h('div', { class: 'block' }, h('h2', {}, 'Link diretti'), h('div', { class: 'cards' }, links.map(docLink))) : null,
     u !== 'Partenti' ? cartaBox(u) : null,
     h('div', { class: 'block' }, h('div', { class: 'rel-head' }, h('h2', {}, 'Ragazzi ', h('span', { class: 'muted' }, rag.length)), h('button', { class: 'btn small', type: 'button', onclick: () => openForm('ragazzi', { unita: u }) }, '+ Aggiungi')),
