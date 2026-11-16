@@ -1,6 +1,6 @@
 // Service worker: tiene in memoria i file dell'app per aprirla anche senza rete.
 // Cambia il numero di versione a ogni aggiornamento pubblicato.
-const V = 'scout-v1';
+const V = 'scout-v2';
 const FILES = ['./', 'index.html', 'config.js', 'css/style.css', 'js/app.js', 'js/store.js', 'js/schema.js', 'js/ui.js', 'js/views.js', 'icons/icon.svg', 'icons/icon-192.png', 'manifest.webmanifest', 'esempi/carta-di-clan-esempio.pdf', 'esempi/progetto-di-branca-esempio.pdf'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(V).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== V).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
