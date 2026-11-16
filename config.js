@@ -12,7 +12,7 @@ window.SCOUT_CONFIG = {
   NOME_GRUPPO: 'Vulclan RS Resana 1',                // es. "Castelfranco 1"
 
   // Indirizzo della web app Apps Script (finisce con /exec)
-  API_URL: '',
+  API_URL: 'https://script.google.com/macros/s/AKfycbxDffY5-5VEqpDOK-HvK-JIzctMJVV-qYfb9JIP3NKKrlk0qNDmrkY1SZbo_gRRQPr6/exec',
 
   // ID client OAuth di Google per l'accesso con account personale.
   // Se vuoto, l'accesso avviene con il codice staff + scelta del profilo.
